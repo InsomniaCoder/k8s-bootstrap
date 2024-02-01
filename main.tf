@@ -28,6 +28,11 @@ resource "kubernetes_manifest" "karpenter_nodepool" {
   manifest = yamldecode(file("${path.module}/karpenter-nodepool.yaml"))
 }
 
+resource "kubernetes_manifest" "karpenter_ingress_nodepool" {
+  manifest = yamldecode(file("${path.module}/karpenter-ingress-nodepool.yaml"))
+}
+
+
 provider "helm" {
   kubernetes {
     host                   = module.eks.cluster_endpoint
