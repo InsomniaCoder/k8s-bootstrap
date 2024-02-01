@@ -3,6 +3,7 @@ kind: NodePool
 metadata:
   name: default
 spec:
+  weight: 50
   template:
     spec:
       nodeClassRef:
