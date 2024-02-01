@@ -27,3 +27,7 @@ spec:
         operator: In
         values:
         - spot
+      - key: kubernetes.io/arch
+        operator: In
+        values:
+        - amd64
