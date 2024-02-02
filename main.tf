@@ -54,10 +54,10 @@ data "aws_ecrpublic_authorization_token" "token" {
 data "aws_availability_zones" "available" {}
 
 locals {
-  name   = "por-test"
-  region = "ap-southeast-1"
+  name   = "${var.cluster_name}"
+  region = "${var.region}"
 
-  vpc_cidr = "10.29.0.0/16"
+  vpc_cidr = "${var.vpc_cidr}"
   azs      = slice(data.aws_availability_zones.available.names, 0, 3)
 
   tags = {
@@ -164,6 +164,10 @@ module "eks_blueprints_addons" {
     }
     vpc-cni    = {}
     kube-proxy = {}
+    aws-ebs-csi-driver = {
+      service_account_role_arn = module.ebs_csi_irsa_role.iam_role_arn
+      most_recent = true
+    }
   }
 
   enable_karpenter = true
